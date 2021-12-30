@@ -1,3 +1,4 @@
+
 .logins{
     text-align: center;
     margin-top: 180px;
@@ -36,4 +37,70 @@
     font-size: 20px;
     font-weight: bold;
     margin-top: 30px;
+}
+
+.home_header{
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont,"Segoe UI", Ubuntu, sans-serif;
+    margin-top: 50px;
+
+}
+
+.home_title{
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont,"Segoe UI", Ubuntu, sans-serif;
+    margin-top: 50px;
+}
+
+.home_cont{
+    height: 55px;
+    background-color: #ADD8E6;
+
+}
+
+.market_title{
+    text-align: center;
+    font-family:  -apple-system, BlinkMacSystemFont,"Segoe UI", Ubuntu, sans-serif;
+    margin-top: 50px;
+}
+
+.home_paragraph{
+    font-size: 20px;
+}
+
+
+
+.images{
+    width: 200px;
+    height: 200px;
+    margin-left: 300px;
+    margin-top: 50px;
+
+}
+
+.coin_item{
+    list-style: none;
+
+}
+
+.coin_p{
+    margin-left: 370px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.twos{
+    display: flex;
+}
+
+
+.coins_title{
+    margin-top: 50px;
+
+}
+
+.col-8{
+    margin-left: 300px;
+
 }

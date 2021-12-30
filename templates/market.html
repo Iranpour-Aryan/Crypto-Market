@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Crypto Market{% endblock %}
+
+{% block content %}
+    <h1 class="market_title">Welcome to the Crypto Market!</h1>
+    <div class="row" style="margin-top:20px; margin-left:20px">
+   <div class="col-8">
+     <p>Begin purchasing by clicking purchase on any coins</p>
+       <br>
+       <head><meta http-equiv="refresh" content="10"/></head>
+          <table class="table table-hover table-dark">
+             <thead>
+                <tr>
+                   <!-- Your Columns HERE -->
+                   <th scope="col">Name</th>
+                   <th scope="col">Price in USDT</th>
+                   <th scope="col">Quantity you want to purchase</th>
+                </tr>
+             </thead>
+             <tbody>
+                <tr>
+                  <th scope="row">BTC (Bitcoin)</th>
+                  <td>{{ BTC_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">ETH (Ethereum)</th>
+                  <td>{{ ETH_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">ADA (Cardano)</th>
+                  <td>{{ ADA_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">XRP</th>
+                  <td>{{ XRP_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">DOGE</th>
+                  <td>{{ DOGE_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">SOL (Solana)</th>
+                  <td>{{ SOL_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">XLM (Stellar)</th>
+                  <td>{{ XLM_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">VET (VeChain)</th>
+                  <td>{{ VET_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">EOS</th>
+                  <td>{{ EOS_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">THETA </th>
+                  <td>{{ THETA_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">TRX (TRON)</th>
+                  <td>{{ TRX_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">MATIC (Polygon)</th>
+                  <td>{{ MATIC_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">LTC (Litecoin)</th>
+                  <td>{{ LTC_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">QNT (Quant)</th>
+                  <td>{{ QNT_price }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">LINK (Chainlink)</th>
+                  <td>{{ LINK_price }}</td>
+                </tr>
+             </tbody>
+          </table>
+     </head>
+   </div>
+  </div>
+{% endblock %}

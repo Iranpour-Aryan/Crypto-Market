@@ -2,5 +2,82 @@
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
+<style>
+    .navbar{
+    position: sticky;
+    top: 0;
+}
+</style>
+
+<div class="home_cont">
+    <h1 class="home_title">Welcome to Aryan's Crypto Market</h1>
+</div>
+<div class="home_header">
+    <p class="home_paragraph">This page provides us information about the website and also
+        which coins users will be interacting with in the market</p>
+    <p>In order to begin buying, selling and trading coins, you need to start off by<a href="{{url_for('register')}}"> Registering here</a></p>
+    <p>If you have already registered an account, you need to <a href="{{url_for('login')}}">Login here</a> to access you wallet and the market.</p>
+    <h3 class="coins_title">All the coins that you will be available to you in the market.</h3>
+</div>
+
+<div class="coins">
+    <ul class="twos">
+        <li class="coin_item"><img class="images" src="https://media.istockphoto.com/photos/dark-bitcoin-3d-coin-logo-illustration-in-gold-with-shadows-rendering-picture-id899414380?k=20&m=899414380&s=170667a&w=0&h=VrtPjv0Pc4B6V4B_T85pCLgk0RMWybFZbBt9C8cOkCc=">
+        <p class="coin_p">BTC</p>
+        </li>
+        <li class="coin_item"><img class="images" src="https://d33wubrfki0l68.cloudfront.net/e0901e625790ee3b9f79d3b090b1723111182f74/74648/static/4b5288012dc4b32ae7ff21fccac98de1/e1ebd/eth-diamond-black-gray.png">
+        <p class="coin_p">ETH</p>
+        </li>
+    </ul>
+    <ul class="twos">
+        <li class="coin_item"><img class="images" src="https://render.fineartamerica.com/images/rendered/default/print/8/7.5/break/images/artworkimages/medium/3/cardano-crypto-logo-ada-paulo-augusto.jpg">
+        <p class="coin_p">ADA</p>
+        </li>
+        <li class="coin_item"><img class="images" src="https://i.pinimg.com/originals/d1/da/3e/d1da3e364444683013c6a7ac67d67063.png">
+        <p class="coin_p">XRP</p>
+        </li>
+    </ul>
+    <ul class="twos">
+        <li class="coin_item"><img class="images" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxspKL93ubzAsLv13ojKUWRUCxOvVK72jLjw&usqp=CAU">
+        <p class="coin_p">Doge Coin</p>
+        </li>
+        <li class="coin_item"><img class="images" src="https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png">
+        <p class="coin_p">SOL</p>
+        </li>
+    </ul>
+    <ul class="twos">
+        <li class="coin_item"><img class="images" src="https://s2.coinmarketcap.com/static/img/coins/200x200/512.png">
+        <p class="coin_p">XLM</p>
+        </li>
+        <li class="coin_item"><img class="images" src="https://play-lh.googleusercontent.com/uILVZk2OI_uOezv3nihuu-tJftfEOGFev17FCIx3H-2Uef2MefGLOAPiP4fDIBTv-_0=w200">
+        <p class="coin_p">VET</p>
+        </li>
+    </ul>
+    <ul class="twos">
+        <li class="coin_item"><img class="images" src="https://www.pngitem.com/pimgs/m/201-2019623_eos-coin-logo-png-transparent-png.png">
+        <p class="coin_p">EOS</p>
+        </li>
+        <li class="coin_item"><img class="images" src="https://seeklogo.com/images/T/theta-token-logo-642A52B22C-seeklogo.com.png">
+        <p class="coin_p">THETA</p>
+        </li>
+    </ul>
+    <ul class="twos">
+        <li class="coin_item"><img class="images" src="https://www.nicepng.com/png/detail/794-7946086_tron-tron-coin-logo.png">
+        <p class="coin_p">TRX</p>
+        </li>
+        <li class="coin_item"><img class="images" src="https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png">
+        <p class="coin_p">MATIC</p>
+        </li>
+    </ul>
+    <ul class="twos">
+        <li class="coin_item"><img class="images" src="https://p.kindpng.com/picc/s/231-2311654_why-do-we-accept-only-litecoin-and-no.png">
+        <p class="coin_p">LTC</p>
+        </li>
+        <li class="coin_item"><img class="images" src="https://external-preview.redd.it/pjrFcPn69uRWIFtmLyQ3uzBBKsObIotp3-gBKjNu0aU.jpg?auto=webp&s=3a4c48ac0cb64f2b9857da34515309cef0272d6f">
+        <p class="coin_p">QNT</p>
+        </li>
+    </ul>
+</div>
+
 
 {% endblock %}
