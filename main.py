@@ -98,7 +98,10 @@ def market():
     LTC_price = yf.download(tickers='LTC-USD', period='10m')
     QNT_price = yf.download(tickers='QNT-USD', period='10m')
     LINK_price = yf.download(tickers='LINK-USD', period='10m')
-    return render_template('market.html', BTC_price=list(BTC_price['Close'])[0],
+
+    if "username" in session:
+
+        return render_template('market.html', BTC_price=list(BTC_price['Close'])[0],
                            ETH_price=list(ETH_price['Close'])[0],
                            ADA_price=list(ADA_price["Close"])[0], XRP_price=list(XRP_price["Close"])[0],
                            DOGE_price=list(DOGE_price["Close"])[0],
@@ -110,6 +113,9 @@ def market():
                            QNT_price=list(QNT_price["Close"])[0],
                            LINK_price=list(LINK_price["Close"])[0]
                            )
+
+    flash("You need to login to access the market")
+    return redirect(url_for("login"))
 
 
 

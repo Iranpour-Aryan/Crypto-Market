@@ -104,3 +104,13 @@
     margin-left: 300px;
 
 }
+
+.inputs{
+    display: flex;
+
+}
+
+.market_button{
+    margin-left: 40px;
+
+}
