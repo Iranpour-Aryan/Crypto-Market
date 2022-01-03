@@ -140,7 +140,7 @@ def market():
                 new_dt = dt
 
 
-        if (type(num_coins) != int) or int(num_coins) <= 0:
+        if (type(int(num_coins)) != int) or int(num_coins) <= 0:
             flash("Please enter an appropriate integer value!")
             return redirect(url_for("market"))
         elif new_dt == {}:
