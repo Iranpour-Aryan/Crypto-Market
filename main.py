@@ -5,8 +5,10 @@ from flask import Flask, redirect, url_for, render_template, request, session, f
 from datetime import timedelta
 from pymongo import MongoClient
 from dotenv import load_dotenv
-import yfinance as yf
 
+from requests import Request, Session
+from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
+import json
 
 load_dotenv()
 
@@ -16,6 +18,20 @@ app.permanent_session_lifetime = timedelta(minutes=10)
 ca = certifi.where()
 client = MongoClient(os.environ.get("MONGODB_URI"), tlsCAFile=ca)
 app.db = client.crypto_market
+
+url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+parameters = {
+  'start':'1',
+  'limit':'16',
+  'convert':'USD'
+}
+headers = {
+    "X-CMC_PRO_API_KEY": '498cd818-76c9-477e-8327-8c6768bbacf8',
+    "Accepts" : 'application/json'
+}
+
+
+
 
 @app.route('/')
 def home():
@@ -32,7 +48,7 @@ def register():
 
             if existing_user is None:   #If there doesn't exists that username
                 hashpass = generate_password_hash(request.form["password"]) #Then you generate a hashed password for security for database
-                app.db.users.insert_one({"username": request.form["username"], "password": hashpass, "email": request.form["email"]})   #Then you add the info into our users collection in our database
+                app.db.users.insert_one({"username": request.form["username"], "password": hashpass, "email": request.form["email"], "wallet": 10000, "coins": []})   #Then you add the info into our users collection in our database
                 return redirect(url_for("user")) #You get redirected to user page, then redirected to login.
 
             else:   #If there exists a user in database with that username in form,
@@ -67,7 +83,11 @@ def login():
 def user():
     if "username" in session:   #You cannot access the user page until you are successfully logged in
         username = session["username"]
-        return render_template("user.html", username=username)
+        user_1 = app.db.users.find_one({"username": f"{username}"})
+
+        wallet = user_1["wallet"]
+
+        return render_template("user.html", username=username, wallet = wallet)
 
     else:
         flash("You need to login!")
@@ -81,41 +101,78 @@ def logout():
     session.pop("username", None)       #clears the user data once logged out
     return redirect(url_for("login"))
 
-@app.route("/market")
+@app.route("/market",methods=["POST", "GET"])
 def market():
-    BTC_price = yf.download(tickers='BTC-USD', period='10m')
-    ETH_price = yf.download(tickers='ETH-USD', period='10m')
-    ADA_price = yf.download(tickers='ADA-USD', period='10m')
-    XRP_price = yf.download(tickers='XRP-USD', period='10m')
-    DOGE_price = yf.download(tickers='DOGE-USD', period='10m')
-    SOL_price = yf.download(tickers='SOL-USD', period='10m')
-    XLM_price = yf.download(tickers='XLM-USD', period='10m')
-    VET_price = yf.download(tickers='VET-USD', period='10m')
-    EOS_price = yf.download(tickers='EOS-USD', period='10m')
-    THETA_price = yf.download(tickers='THETA-USD', period='10m')
-    TRX_price = yf.download(tickers='TRX-USD', period='10m')
-    MATIC_price = yf.download(tickers='MATIC-USD', period='10m')
-    LTC_price = yf.download(tickers='LTC-USD', period='10m')
-    QNT_price = yf.download(tickers='QNT-USD', period='10m')
-    LINK_price = yf.download(tickers='LINK-USD', period='10m')
+    data_price = []
+    data_symbols = []
+    session_market = Session()
+    session_market.headers.update(headers)
+    try:
+        response = session_market.get(url, params=parameters)
+        data = json.loads(response.text)['data']
+    except (ConnectionError, Timeout, TooManyRedirects) as e:
+        print(e)
 
-    if "username" in session:
+    for dt in data:
+        data_price.append(dt['quote']['USD']['price'])
 
-        return render_template('market.html', BTC_price=list(BTC_price['Close'])[0],
-                           ETH_price=list(ETH_price['Close'])[0],
-                           ADA_price=list(ADA_price["Close"])[0], XRP_price=list(XRP_price["Close"])[0],
-                           DOGE_price=list(DOGE_price["Close"])[0],
-                           SOL_price=list(SOL_price["Close"])[0], XLM_price=list(XLM_price["Close"])[0],
-                           VET_price=list(VET_price["Close"])[0],
-                           EOS_price=list(EOS_price["Close"])[0], THETA_price=list(THETA_price["Close"])[0],
-                           TRX_price=list(TRX_price["Close"])[0],
-                           MATIC_price=list(MATIC_price["Close"])[0], LTC_price=list(LTC_price["Close"])[0],
-                           QNT_price=list(QNT_price["Close"])[0],
-                           LINK_price=list(LINK_price["Close"])[0]
-                           )
+    for dt in data:
+        data_symbols.append(dt['symbol'])
 
-    flash("You need to login to access the market")
-    return redirect(url_for("login"))
+    if request.method == "POST":
+        try:
+            response = session_market.get(url, params=parameters)
+            data = json.loads(response.text)['data']
+        except (ConnectionError, Timeout, TooManyRedirects) as e:
+            print(e)
+
+        username = session["username"]
+        user_1 = app.db.users.find_one({"username": f"{username}"})
+        wallet = user_1["wallet"]
+
+        num_coins = request.form["num_coins"]
+        coin = request.form["myCoins"]
+
+        new_dt = {}
+
+        for dt in data:
+            if coin == dt['symbol']:
+                new_dt = dt
+
+
+        if (type(num_coins) != int) or int(num_coins) <= 0:
+            flash("Please enter an appropriate integer value!")
+            return redirect(url_for("market"))
+        elif new_dt == {}:
+            flash("Please choose one of the above coins, except for SHIB.")
+            return redirect(url_for("market"))
+        else:
+            coin_price = new_dt['quote']['USD']['price']
+            if coin_price * int(num_coins) > wallet:
+                flash("Sorry but you do not have enough in your wallet make this purchase")
+                return redirect(url_for("market"))
+            else:
+                flash("You have purchased the following item!")
+                return redirect(url_for("user"))
+
+    else:
+
+        if "username" in session:
+            username = session["username"]
+            user_1 = app.db.users.find_one({"username": f"{username}"})
+
+            wallet = user_1["wallet"]
+
+            try:
+                return render_template('market.html',data_price=data_price,wallet=wallet)
+            except KeyError:
+                flash("Sorry the market is API is a bit slow!")
+                return redirect(url_for("user"))
+
+        flash("You need to login to access the market")
+        return redirect(url_for("login"))
+
+
 
 
 

@@ -114,3 +114,44 @@
     margin-left: 40px;
 
 }
+
+.cont_user{
+    text-align: center;
+    font-family:  -apple-system, BlinkMacSystemFont,"Segoe UI", Ubuntu, sans-serif;
+
+}
+
+.user_welcome{
+    font-size: 40px;
+    margin-top: 40px;
+}
+
+.user_info{
+    margin-top: 30px;
+
+}
+
+.wallet_amount{
+    margin-left: 900px;
+    color: green;
+
+}
+
+.markets{
+    text-align: center;
+    margin-top: 150px;
+    background-color:#ADD8E6;
+
+}
+
+.purchase{
+    margin-top: 20px;
+
+}
+
+.market_coin_buy{
+    margin-right: 30px;
+
+
+}
+

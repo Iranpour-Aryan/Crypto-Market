@@ -2,11 +2,18 @@
 {% block title %}Crypto Market{% endblock %}
 
 {% block content %}
-    <form class="markets" method="post">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h3 class="wallet_amount">You have ${{wallet}} in your wallet to spend!</h3>
     <h1 class="market_title">Welcome to the Crypto Market!</h1>
     <div class="row" style="margin-top:20px; margin-left:20px">
    <div class="col-8">
-     <p>Begin purchasing by clicking purchase on any coins</p>
+     <p>Begin purchasing!</p>
        <br>
        <div><meta http-equiv="refresh" content="10"/></div>
           <table class="table table-hover table-dark">
@@ -15,91 +22,105 @@
                    <!-- Your Columns HERE -->
                    <th scope="col">Name</th>
                    <th scope="col">Price in USDT</th>
-                   <th scope="col">Quantity you want to purchase</th>
                 </tr>
              </thead>
              <tbody>
                 <tr>
-                  <th scope="row">BTC (Bitcoin)</th>
-                  <td>{{ BTC_price }}</td>
-                  <td class="inputs"><p><input type="text" name="bitcoin_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
+                  <th scope="row">BTC</th>
+                  <td>{{ data_price[0] }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">ETH (Ethereum)</th>
-                  <td>{{ ETH_price }}</td>
-                  <td class="inputs"><p><input type="text" name="ethereum_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
+                  <th scope="row">ETH</th>
+                  <td>{{ data_price[1] }}</td>
 
                 </tr>
                 <tr>
-                  <th scope="row">ADA (Cardano)</th>
-                  <td>{{ ADA_price }}</td>
-                  <td class="inputs"><p><input type="text" name="cardano_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
+                  <th scope="row">BNB</th>
+                  <td>{{ data_price[2] }}</td>
 
+                </tr>
+                <tr>
+                  <th scope="row">USDT</th>
+                  <td>{{ data_price[3] }}</td>
+
+                </tr>
+                <tr>
+                  <th scope="row">SOL</th>
+                  <td>{{ data_price[4] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">ADA</th>
+                  <td>{{ data_price[5] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">USDC</th>
+                  <td>{{ data_price[6] }}</td>
                 </tr>
                 <tr>
                   <th scope="row">XRP</th>
-                  <td>{{ XRP_price }}</td>
-                  <td class="inputs"><p><input type="text" name="xrp_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
-
+                  <td>{{ data_price[7] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">LUNA</th>
+                  <td>{{ data_price[8] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">DOT</th>
+                  <td>{{ data_price[9] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">AVAX</th>
+                  <td>{{ data_price[10] }}</td>
                 </tr>
                 <tr>
                   <th scope="row">DOGE</th>
-                  <td>{{ DOGE_price }}</td>
-                  <td class="inputs"><p><input type="text" name="doge_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
+                  <td>{{ data_price[11] }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">SOL (Solana)</th>
-                  <td>{{ SOL_price }}</td>
-                  <td class="inputs"><p><input type="text" name="solana_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
+                  <th scope="row">SHIB</th>
+                  <td>{{ data_price[12] }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">XLM (Stellar)</th>
-                  <td>{{ XLM_price }}</td>
-                  <td class="inputs"><p><input type="text" name="xlm_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
+                  <th scope="row">MATIC</th>
+                  <td>{{ data_price[13] }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">VET (VeChain)</th>
-                  <td>{{ VET_price }}</td>
-                  <td class="inputs"><p><input type="text" name="vet_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
+                  <th scope="row">BUSD</th>
+                  <td>{{ data_price[14] }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">EOS</th>
-                  <td>{{ EOS_price }}</td>
-                  <td class="inputs"><p><input type="text" name="eos_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
-                </tr>
-                <tr>
-                  <th scope="row">THETA </th>
-                  <td>{{ THETA_price }}</td>
-                  <td class="inputs"><p><input type="text" name="theta_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
-                </tr>
-                <tr>
-                  <th scope="row">TRX (TRON)</th>
-                  <td>{{ TRX_price }}</td>
-                  <td class="inputs"><p><input type="text" name="trx_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
-                </tr>
-                <tr>
-                  <th scope="row">MATIC (Polygon)</th>
-                  <td>{{ MATIC_price }}</td>
-                  <td class="inputs"><p><input type="text" name="matic_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
-                </tr>
-                <tr>
-                  <th scope="row">LTC (Litecoin)</th>
-                  <td>{{ LTC_price }}</td>
-                  <td class="inputs"><p><input type="text" name="ltc_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
-                </tr>
-                <tr>
-                  <th scope="row">QNT (Quant)</th>
-                  <td>{{ QNT_price }}</td>
-                  <td class="inputs"><p><input type="text" name="qnt_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
-                </tr>
-                <tr>
-                  <th scope="row">LINK (Chainlink)</th>
-                  <td>{{ LINK_price }}</td>
-                  <td class="inputs"><p><input type="text" name="link_amount"></p><p><input class="market_button" type="submit" value="submit"></p></td>
+                  <th scope="row">CRO</th>
+                  <td>{{data_price[15] }}</td>
                 </tr>
              </tbody>
           </table>
    </div>
   </div>
-    </form>
+  <form class="markets" method="post">
+      <div class="buy">
+          <p><label class="market_coin_buy" for="myCoins">Choose a coin you'd like to purchase!</label></p>
+            <input list="coins" id="myCoins" name="myCoins" />
+            <datalist id="coins">
+              <option value="BTC">
+              <option value="ETH">
+              <option value="BNB">
+              <option value="USDT">
+              <option value="SOL">
+              <option value="ADA">
+              <option value="USDC">
+              <option value="XRP">
+              <option value="LUNA">
+              <option value="DOT">
+              <option value="AVAX">
+              <option value="DOGE">
+              <option value="MATIC">
+              <option value="BUSD">
+              <option value="CRO">
+            </datalist>
+        <p>Quantity you want to purchase?</p><input type="text" name="num_coins">
+        <p class="purchase"><input type="submit" value="Purchase"></p>
+    </div>
+
+  </form>
+
 {% endblock %}
