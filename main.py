@@ -87,7 +87,9 @@ def user():
 
         wallet = user_1["wallet"]
 
-        return render_template("user.html", username=username, wallet = wallet)
+        purchased_items = user_1["coins"]
+
+        return render_template("user.html", username=username, wallet = wallet, purchased_items=purchased_items)
 
     else:
         flash("You need to login!")
@@ -147,11 +149,30 @@ def market():
             flash("Please choose one of the above coins, except for SHIB.")
             return redirect(url_for("market"))
         else:
+            number_coins = int(num_coins)
             coin_price = new_dt['quote']['USD']['price']
-            if coin_price * int(num_coins) > wallet:
+            total = coin_price * number_coins
+            if total > wallet:
                 flash("Sorry but you do not have enough in your wallet make this purchase")
                 return redirect(url_for("market"))
             else:
+                wallet_remaining = wallet - total
+                has = False
+                for c in user_1["coins"]:
+                    if coin == c["symbol"]:
+                        has = True
+
+            if has == True:
+                app.db.users.update_one({"username": f"{username}", "coins.symbol": f"{coin}"}, {
+                    "$inc": {"coins.$.num_coins": number_coins, "coins.$.total_amount": total}})
+                app.db.users.update_one({"username": f"{username}"}, {"$set": {"wallet": wallet_remaining}})
+                flash("You have purchased the following item!")
+                return redirect(url_for("user"))
+
+            else:
+                print("bob")
+                app.db.users.update_one({"username": f"{username}"},{"$set": {"coins": [{"symbol": f"{coin}", "num_coins": number_coins, "total_amount": total}]}})
+                app.db.users.update_one({"username": f"{username}"}, {"$set": {"wallet": wallet_remaining}})
                 flash("You have purchased the following item!")
                 return redirect(url_for("user"))
 
