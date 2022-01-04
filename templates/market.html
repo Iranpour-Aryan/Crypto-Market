@@ -25,73 +25,13 @@
                 </tr>
              </thead>
              <tbody>
-                <tr>
-                  <th scope="row">BTC</th>
-                  <td>{{ data_price[0] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">ETH</th>
-                  <td>{{ data_price[1] }}</td>
+                  {% for i in range(16) %}
+                    <tr>
+                      <th scope="row">{{data_symbols[i]}}</th>
+                      <td>{{data_price[i] }}</td>
+                    </tr>
+                    {% endfor %}
 
-                </tr>
-                <tr>
-                  <th scope="row">BNB</th>
-                  <td>{{ data_price[2] }}</td>
-
-                </tr>
-                <tr>
-                  <th scope="row">USDT</th>
-                  <td>{{ data_price[3] }}</td>
-
-                </tr>
-                <tr>
-                  <th scope="row">SOL</th>
-                  <td>{{ data_price[4] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">ADA</th>
-                  <td>{{ data_price[5] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">USDC</th>
-                  <td>{{ data_price[6] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">XRP</th>
-                  <td>{{ data_price[7] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">LUNA</th>
-                  <td>{{ data_price[8] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">DOT</th>
-                  <td>{{ data_price[9] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">AVAX</th>
-                  <td>{{ data_price[10] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">DOGE</th>
-                  <td>{{ data_price[11] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">SHIB</th>
-                  <td>{{ data_price[12] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">MATIC</th>
-                  <td>{{ data_price[13] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">BUSD</th>
-                  <td>{{ data_price[14] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">CRO</th>
-                  <td>{{data_price[15] }}</td>
-                </tr>
              </tbody>
           </table>
    </div>
@@ -101,21 +41,9 @@
           <p><label class="market_coin_buy" for="myCoins">Choose a coin you'd like to purchase!</label></p>
             <input list="coins" id="myCoins" name="myCoins" />
             <datalist id="coins">
-              <option value="BTC">
-              <option value="ETH">
-              <option value="BNB">
-              <option value="USDT">
-              <option value="SOL">
-              <option value="ADA">
-              <option value="USDC">
-              <option value="XRP">
-              <option value="LUNA">
-              <option value="DOT">
-              <option value="AVAX">
-              <option value="DOGE">
-              <option value="MATIC">
-              <option value="BUSD">
-              <option value="CRO">
+              {% for symbol in data_symbols %}
+              <option value="{{symbol}}">
+              {% endfor %}
             </datalist>
         <p>Quantity you want to purchase?</p><input type="text" name="num_coins">
         <p class="purchase"><input type="submit" value="Purchase"></p>

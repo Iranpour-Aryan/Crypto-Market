@@ -151,7 +151,26 @@
 
 .market_coin_buy{
     margin-right: 30px;
+}
 
+.user{
+    text-align: center;
+    margin-top: 150px;
+    background-color:#ADD8E6;
 
+}
+
+.sell{
+    margin-top: 20px;
+
+}
+
+.q_sell{
+    margin-top: 20px;
+
+}
+
+.market_coin_sell{
+    margin-right: 30px;
 }
 

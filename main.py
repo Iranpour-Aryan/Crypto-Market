@@ -80,7 +80,7 @@ def login():
         return render_template("login.html")    #If username isn't in the session after registrating, we want it to log in
 
 
-@app.route("/user")
+@app.route("/user", methods=["POST", "GET"])
 def user():
     if "username" in session:   #You cannot access the user page until you are successfully logged in
         username = session["username"]
@@ -90,7 +90,60 @@ def user():
 
         purchased_items = user_1["coins"]
 
-        return render_template("user.html", username=username, wallet = wallet, purchased_items=purchased_items)
+        purchased_items_symbol = []
+
+        for coining in user_1["coins"]:
+            purchased_items_symbol.append(coining["symbol"])
+
+        if request.method == "POST":
+
+            num_coins = request.form["num_coins"]
+            coin = request.form["user_coins"]
+
+            new_dt = {}
+
+            for c in user_1["coins"]:
+                if coin == c["symbol"]:
+                    new_dt = c
+
+            if (type(int(num_coins)) != int) or int(num_coins) <= 0:
+                flash("Please enter an appropriate integer value!")
+                return redirect(url_for("user"))
+
+            elif new_dt == {}:
+                flash("Sorry but you do not have that coin in your wallet!")
+                return redirect(url_for("user"))
+
+            else:
+                number_coins = int(num_coins)
+                total_coin_price = new_dt["total_amount"]
+
+                if number_coins > new_dt["num_coins"]:
+                    flash("Sorry you do not have enough number of coins for this coin")
+                    return redirect(url_for("user"))
+
+                elif number_coins == new_dt["num_coins"]:
+                    wallet_remaining = wallet + total_coin_price
+                    app.db.users.update_one({"username": f"{username}"}, {"$set": {"wallet": wallet_remaining}})
+                    app.db.users.update_one({"username": f"{username}"}, {"$pull": {"coins": {"symbol": f"{coin}"}}})
+
+                    flash("You have successfully sold this coin")
+                    return redirect(url_for("user"))
+
+                else:
+                    price_one_coin = total_coin_price / new_dt["num_coins"]
+                    total_sell_price = price_one_coin * number_coins
+                    wallet_remaining = wallet + total_sell_price
+                    app.db.users.update_one({"username": f"{username}"}, {"$set": {"wallet": wallet_remaining}})
+                    app.db.users.update_one({"username": f"{username}", "coins.symbol": f"{coin}"}, {
+                        "$inc": {"coins.$.num_coins": -number_coins, "coins.$.total_amount": -total_sell_price}})
+                    flash("You have successfully sold this coin")
+                    return redirect(url_for("user"))
+
+
+
+        else:
+            return render_template("user.html", username=username, wallet = wallet, purchased_items=purchased_items, purchased_items_symbol=purchased_items_symbol)
 
     else:
         flash("You need to login!")
@@ -188,7 +241,7 @@ def market():
             wallet = user_1["wallet"]
 
             try:
-                return render_template('market.html',data_price=data_price,wallet=wallet)
+                return render_template('market.html',data_price=data_price,wallet=wallet, data_symbols=data_symbols)
             except KeyError:
                 flash("Sorry the market is API is a bit slow!")
                 return redirect(url_for("user"))
