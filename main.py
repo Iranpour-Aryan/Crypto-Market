@@ -25,8 +25,9 @@ parameters = {
   'limit':'16',
   'convert':'USD'
 }
+
 headers = {
-    "X-CMC_PRO_API_KEY": '498cd818-76c9-477e-8327-8c6768bbacf8',
+    "X-CMC_PRO_API_KEY": os.environ.get("apikey"),
     "Accepts" : 'application/json'
 }
 
@@ -107,8 +108,10 @@ def logout():
 def market():
     data_price = []
     data_symbols = []
+
     session_market = Session()
     session_market.headers.update(headers)
+
     try:
         response = session_market.get(url, params=parameters)
         data = json.loads(response.text)['data']
@@ -171,7 +174,7 @@ def market():
 
             else:
                 print("bob")
-                app.db.users.update_one({"username": f"{username}"},{"$set": {"coins": [{"symbol": f"{coin}", "num_coins": number_coins, "total_amount": total}]}})
+                app.db.users.update_one({"username": f"{username}"},{"$push": {"coins": {"symbol": f"{coin}", "num_coins": number_coins, "total_amount": total}}})
                 app.db.users.update_one({"username": f"{username}"}, {"$set": {"wallet": wallet_remaining}})
                 flash("You have purchased the following item!")
                 return redirect(url_for("user"))
