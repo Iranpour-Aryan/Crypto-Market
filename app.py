@@ -14,6 +14,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.permanent_session_lifetime = timedelta(minutes=10)
+app.secret_key = "hello"
 
 ca = certifi.where()
 client = MongoClient(os.environ.get("MONGODB_URI"), tlsCAFile=ca)
@@ -254,7 +255,6 @@ def market():
 
 
 if __name__ == "__main__":
-    app.secret_key = "hello"
     app.run(debug=True)
 
 
