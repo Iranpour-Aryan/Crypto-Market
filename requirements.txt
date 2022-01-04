@@ -3,3 +3,7 @@ pymongo[srv]
 gunicorn
 certifi
 python-dotenv
+requests
+werkzeug.security
+requests.exceptions
+datetime
