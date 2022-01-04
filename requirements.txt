@@ -1,0 +1,6 @@
+python == 3.8
+flask
+pymongo[srv]
+gunicorn
+certifi
+python-dotenv
