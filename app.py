@@ -203,7 +203,7 @@ def market():
             flash("Please enter an appropriate integer value!")
             return redirect(url_for("market"))
         elif new_dt == {}:
-            flash("Please choose one of the above coins, except for SHIB.")
+            flash("Please choose one of the above coins.")
             return redirect(url_for("market"))
         else:
             number_coins = int(num_coins)
