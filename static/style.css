@@ -73,8 +73,15 @@
 .images{
     width: 200px;
     height: 200px;
-    margin-left: 300px;
     margin-top: 50px;
+    margin-left: 150px;
+    transition: 1s;
+    padding: 15px;
+}
+
+.images:hover{
+    filter: greyscale(100%);
+    transform: scale(1.1);
 
 }
 
@@ -88,10 +95,6 @@
     font-size: 20px;
     font-weight: bold;
     margin-top: 30px;
-}
-
-.twos{
-    display: flex;
 }
 
 
@@ -178,6 +181,11 @@
 .msg{
     color: red;
     text-align: center;
+}
+
+.coins{
+    margin: 10px 50x;
+
 }
 
 
