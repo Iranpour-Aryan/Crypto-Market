@@ -181,11 +181,11 @@
 .msg{
     color: red;
     text-align: center;
+    font-size: bold;
 }
 
 .coins{
     margin: 10px 50x;
-    font-size: bold;
 
 }
 
