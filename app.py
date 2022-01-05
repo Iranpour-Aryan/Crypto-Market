@@ -107,6 +107,10 @@ def user():
                 if coin == c["symbol"]:
                     new_dt = c
 
+            if num_coins == "":
+                flash("Please enter an appropriate integer value!")
+                return redirect(url_for("user"))
+
             if (type(int(num_coins)) != int) or int(num_coins) <= 0:
                 flash("Please enter an appropriate integer value!")
                 return redirect(url_for("user"))
@@ -198,8 +202,11 @@ def market():
             if coin == dt['symbol']:
                 new_dt = dt
 
+        if num_coins == "":
+            flash("Please enter an appropriate integer value!")
+            return redirect(url_for("market"))
 
-        if (type(int(num_coins)) != int) or int(num_coins) <= 0:
+        elif (type(int(num_coins)) != int) or int(num_coins) <= 0:
             flash("Please enter an appropriate integer value!")
             return redirect(url_for("market"))
         elif new_dt == {}:
