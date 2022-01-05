@@ -8,7 +8,7 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for msg in messages %}
-                <p>{{msg}}</p>
+                <p class="msg">{{msg}}</p>
             {% endfor %}
         {% endif %}
     {% endwith %}
@@ -42,7 +42,7 @@
 
 <form class="user" method="post">
       <div class="sell">
-          <p><label class="market_coin_sell" for="user_coins">Choose a coin you'd like to Sell!</label></p>
+          <p><label class="market_coin_sell" for="user_coins">Coin to Sell: </label></p>
             <input list="list_coins" id="user_coins" name="user_coins" />
             <datalist id="list_coins">
               {% for symbol in purchased_items_symbol %}

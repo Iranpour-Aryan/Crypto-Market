@@ -38,14 +38,14 @@
   </div>
   <form class="markets" method="post">
       <div class="buy">
-          <p><label class="market_coin_buy" for="myCoins">Choose a coin you'd like to purchase!</label></p>
+          <p class="p_sell"><label class="market_coin_buy" for="myCoins">Choose a coin you'd like to purchase!</label></p>
             <input list="coins" id="myCoins" name="myCoins" />
             <datalist id="coins">
               {% for symbol in data_symbols %}
               <option value="{{symbol}}">
               {% endfor %}
             </datalist>
-        <p>Quantity you want to purchase?</p><input type="text" name="num_coins">
+        <p class="p_sell">Quantity you want to purchase?</p><input type="text" name="num_coins">
         <p class="purchase"><input type="submit" value="Purchase"></p>
     </div>
 
