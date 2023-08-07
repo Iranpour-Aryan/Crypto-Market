@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+
+{% block content %}
+<h3 class="wallet_amount">You have ${{wallet}} in your wallet to spend!</h3>
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p class="msg">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<div class="cont_user">
+    <h3 class="user_welcome">Welcome, {{username}}!</h3>
+    <p class="user_info">Here is an overview of your purchased coins!</p>
+</div>
+<div><meta http-equiv="refresh" content="60"/></div>
+          <table class="table table-hover table-dark">
+             <thead>
+                <tr>
+                   <!-- Your Columns HERE -->
+                   <th scope="col">Name</th>
+                   <th scope="col">Number of Coins</th>
+                   <th scope="col">Total Price</th>
+                </tr>
+             </thead>
+             <tbody>
+                  {% for item in purchased_items %}
+                    <tr>
+                      <th scope="row">{{item["symbol"]}}</th>
+                      <td>{{item["num_coins"]}}</td>
+                      <td>{{item["total_amount"]}}</td>
+                    </tr>
+                    {% endfor %}
+
+             </tbody>
+          </table>
+
+
+<form class="user" method="post">
+      <div class="sell">
+          <p><label class="market_coin_sell" for="user_coins">Coin to Sell: </label></p>
+            <input list="list_coins" id="user_coins" name="user_coins" />
+            <datalist id="list_coins">
+              {% for symbol in purchased_items_symbol %}
+                <option value="{{symbol}}">
+              {% endfor %}
+            </datalist>
+        <p class="q_sell">Quantity you want to sell?</p><input type="text" name="num_coins">
+        <p class="sell"><input type="submit" value="Sell"></p>
+    </div>
+</form>
+
+
+{% endblock %}

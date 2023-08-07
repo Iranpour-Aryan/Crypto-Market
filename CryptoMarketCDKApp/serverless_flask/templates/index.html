@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<style>
+    .navbar{
+    position: sticky;
+    top: 0;
+}
+</style>
+
+<div class="home_cont">
+    <h1 class="home_title">Welcome to Aryan's Crypto Market</h1>
+</div>
+<div class="home_header">
+    <p class="home_paragraph">This page provides us information about the website and also
+        which coins users will be interacting with in the market</p>
+    <p>In order to begin buying, selling and trading coins, you need to start off by<a href="{{url_for('CryptoMarket.register')}}"> Registering here</a></p>
+    <p>If you have already registered an account, you need to <a href="{{url_for('CryptoMarket.login')}}">Login here</a> to access you wallet and the market.</p>
+</div>
+
+<div class="coins">
+        <h3 class="coins_title">Majority of the coins that will be available to you in the market.</h3>
+    <a href="https://en.wikipedia.org/wiki/History_of_bitcoin"><img class="images" src="https://media.istockphoto.com/photos/dark-bitcoin-3d-coin-logo-illustration-in-gold-with-shadows-rendering-picture-id899414380?k=20&m=899414380&s=170667a&w=0&h=VrtPjv0Pc4B6V4B_T85pCLgk0RMWybFZbBt9C8cOkCc="></a>
+    <a href="https://en.wikipedia.org/wiki/Ethereum#:~:text=Ethereum%20was%20initially%20described%20in,goal%20of%20building%20decentralized%20applications.&text=Ethereum%20was%20announced%20at%20the,in%20Miami%2C%20in%20January%202014."><img class="images" src="https://d33wubrfki0l68.cloudfront.net/e0901e625790ee3b9f79d3b090b1723111182f74/74648/static/4b5288012dc4b32ae7ff21fccac98de1/e1ebd/eth-diamond-black-gray.png"></a>
+    <a href="https://en.wikipedia.org/wiki/Cardano_(blockchain_platform)#:~:text=Cardano%20was%20founded%20in%202015,proof%2Dof%2Dwork%20protocols."><img class="images" src="https://render.fineartamerica.com/images/rendered/default/print/8/7.5/break/images/artworkimages/medium/3/cardano-crypto-logo-ada-paulo-augusto.jpg"></a>
+    <a href="https://en.wikipedia.org/wiki/Ripple_(payment_protocol)"><img class="images" src="https://i.pinimg.com/originals/d1/da/3e/d1da3e364444683013c6a7ac67d67063.png"></a>
+    <a href="https://www.investopedia.com/terms/d/dogecoin.asp"><img class="images" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxspKL93ubzAsLv13ojKUWRUCxOvVK72jLjw&usqp=CAU"></a>
+    <a href="https://corporatefinanceinstitute.com/resources/knowledge/other/binance-coin-bnb/"><img class="images" src="https://www.logo.wine/a/logo/Binance/Binance-BNB2-Dark-Background-Logo.wine.svg"></a>
+    <a href="https://en.wikipedia.org/wiki/Tether_(cryptocurrency)"><img class="images" src="https://st4.depositphotos.com/36570844/37909/v/380/depositphotos_379090356-stock-illustration-tether-coin-cryptocurrency-vector-sign.jpg?forcejpeg=true"></a>
+    <a href="https://en.wikipedia.org/wiki/Solana_(blockchain_platform)"><img class="images" src="https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png"></a>
+    <a href="https://en.wikipedia.org/wiki/USD_Coin#:~:text=1%20History-,History,42.5%20billion%20USDC%20in%20circulation."><img class="images" src="https://www.centre.io/hubfs/download-logo-ondark-e9d808671e.png"></a>
+    <a href="https://en.wikipedia.org/wiki/Terra_(currency)"><img class="images" src="https://coinchapter-f476.kxcdn.com/wp-content/uploads/2021/08/LUNA-logo-1024x707.png"></a>
+    <a href="https://en.wikipedia.org/wiki/Polkadot_(cryptocurrency)"><img class="images" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNxwg2n8AOmL6L2IyjDWbbi2WiGxX9yFYG9Q&usqp=CAU"></a>
+    <a href="https://medium.com/100xcoin/the-history-of-polygon-matic-f1dae81b4273"><img class="images" src="https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png"></a>
+
+</div>
+
+
+{% endblock %}

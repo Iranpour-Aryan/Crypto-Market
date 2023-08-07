@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Crypto Market{% endblock %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p class="msg">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <h3 class="wallet_amount">You have ${{wallet}} in your wallet to spend!</h3>
+    <h1 class="market_title">Welcome to the Crypto Market!</h1>
+    <div class="row" style="margin-top:20px; margin-left:20px">
+   <div class="col-8">
+     <p>Begin purchasing!</p>
+       <br>
+       <div><meta http-equiv="refresh" content="60"/></div>
+          <table class="table table-hover table-dark">
+             <thead>
+                <tr>
+                   <!-- Your Columns HERE -->
+                   <th scope="col">Name</th>
+                   <th scope="col">Price in USDT</th>
+                </tr>
+             </thead>
+             <tbody>
+                  {% for i in range(16) %}
+                    <tr>
+                      <th scope="row">{{data_symbols[i]}}</th>
+                      <td>{{data_price[i] }}</td>
+                    </tr>
+                    {% endfor %}
+
+             </tbody>
+          </table>
+   </div>
+  </div>
+  <form class="markets" method="post">
+      <div class="buy">
+          <p class="p_sell"><label class="market_coin_buy" for="myCoins">Choose a coin you'd like to purchase!</label></p>
+            <input list="coins" id="myCoins" name="myCoins" />
+            <datalist id="coins">
+              {% for symbol in data_symbols %}
+              <option value="{{symbol}}">
+              {% endfor %}
+            </datalist>
+        <p class="p_sell">Quantity you want to purchase?</p><input type="text" name="num_coins">
+        <p class="purchase"><input type="submit" value="Purchase"></p>
+    </div>
+
+  </form>
+
+{% endblock %}

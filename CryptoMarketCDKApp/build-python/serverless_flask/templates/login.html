@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<header>
+    <h2 class="title_login">Please login to access your wallet and the market</h2>
+</header>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p class="log_out">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<form class="logins" action="/login" method="post">
+    <div class="log">
+        <p>Username:</p>
+        <p><input type="text" name="username"></p>
+        <p>Password:</p>
+        <p><input type="password" name="password"></p>
+        <p><input type="submit" value="Login"></p>
+        <p>Don't have an account? <a href="{{url_for('CryptoMarket.register')}}">Register here</a></p>
+    </div>
+
+
+</form>
+
+{% endblock %}
