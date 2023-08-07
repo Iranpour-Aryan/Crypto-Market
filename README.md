@@ -1,3 +1,3 @@
 # Crypto-Market
 The link to the website is
-https://aryan-crypto.herokuapp.com/
+https://d17yufiv7rs7d4.cloudfront.net
